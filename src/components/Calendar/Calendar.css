@@ -1,0 +1,68 @@
+.calendar-month {
+  display: flex;
+  justify-content: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  position: relative;
+}
+
+.calendar-month button {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  appearance: none;
+  border: 1px solid lightgray;
+}
+
+.calendar-month .next-month {
+  right: 10px;
+}
+
+.calendar-month .prev-month {
+  left: 10px;
+}
+
+.calendar-days {
+  display: flex;
+  flex-flow: wrap;
+  border-top: 1px solid gray;
+}
+
+.calendar-days>* {
+  width: 14.28%;
+  padding: 10px;
+  text-align: center;
+  border-top: 0;
+  border-right: 1px solid gray;
+  border-bottom: 1px solid gray;
+  border-left: 0;
+}
+
+.calendar-days > div:nth-child(1) {
+  border-left: 1px solid gray;
+}
+
+.calendar-days>div {
+  background: lightblue;
+}
+
+button.day {
+  appearance: none;
+  outline: none;
+}
+
+button.day:nth-child(7n + 1) {
+  border-left: 1px solid gray;
+}
+
+button.day.selected {
+  background: blue;
+}
+
+button.day.between {
+  background: lightblue;
+}
+
+button.outside {
+  background: lightgray;
+}
