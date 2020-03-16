@@ -1,3 +1,7 @@
+.calendar {
+	max-width: 500px;
+}
+
 .calendar-month {
   display: flex;
   justify-content: center;
