@@ -1,5 +1,6 @@
 import React from 'react';
-import axios from 'axios';
+
+import './DatePicker.css';
 
 import {
   getDateArray,
@@ -8,6 +9,8 @@ import {
   getDateISO,
   isLeapYear
 } from '../../utils/calendarHelper';
+
+import FactForDate from '../FactForDate';
 
 import Calendar from '../Calendar';
 
@@ -18,10 +21,6 @@ export default () => {
   const [calendarOpen, setCalendarOpen] = React.useState(false)
   const [selectedDates, setselectedDates] = React.useState([])
   const [dayDiff, setDayDiff] = React.useState(0);
-  const [fact, setFact] = React.useState({
-  	isLoading: false,
-  	data: ''
-  });
 
   const handleClick = date => {
     const datesSet = selectedDates.length === 2;
@@ -55,30 +54,17 @@ export default () => {
     return days.reduce(sum, 0);
   }
 
-  React.useEffect(() => {
-  	if (fromDate) {
-  		const startDate = getDateArray(new Date(fromDate))
-  		setFact({
-  			isLoading: true,
-  		})
-  		axios.get(`http://numbersapi.com/${startDate[1]}/${startDate[2]}/date`).then(res =>
-  			setFact({
-  				data: res.data,
-  				isLoading: false,
-  			}));
-  	}
-  }, [fromDate])
-
   return (
     <div className="date-picker">
-			<label htmlFor="from">From</label>
+			<label htmlFor="from">From: </label>
 			<input 
 				type="date" 
 				value={fromDate} 
 				readOnly
 				onFocus={() => setCalendarOpen(true)}
 			/>
-			<label htmlFor="from">To</label>
+			&nbsp;
+			<label htmlFor="from">To: </label>
 			<input 
 				type="date" 
 				value={toDate} 
@@ -95,12 +81,7 @@ export default () => {
 				<p>Days in range: {dayDiff}</p> 
 				<p>Selected dates in leap year {leapYear ? 'Yes' : 'No'}</p>
 				<p>Mondays in range: {getCertainDays([1],new Date(selectedDates[0]),new Date(selectedDates[1]))}</p>
-				{fact.isLoading && fromDate &&
-					<p>Loading fact for day...</p>
-				}
-				{!fact.isLoading &&
-					<p>{fact.data}</p>
-				}
+				<FactForDate fromDate={fromDate} />
 				</React.Fragment>
 			}
 		</div>

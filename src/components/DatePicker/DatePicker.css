@@ -1,0 +1,7 @@
+.date-picker {
+	margin-top: 20px;
+}
+
+.date-picker > input {
+	font-size: 16px;
+}
